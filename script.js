@@ -1,5 +1,7 @@
 "use strict"
 
+var calculationService = getCalculationService();
+
 function screenWidth(){
     return document.body.clientWidth;
 }
@@ -39,11 +41,11 @@ function setSpecialButtonsSettings(){
 function setButtonsOnClick(){
     $("#btnAC").click(onACClick);
     $("#btnPoint").click(onPointClick);
-    $("#btnDivide").click(onDivideClick);
-    $("#btnMultiple").click(onMultipleClick);
-    $("#btnMinus").click(onMinusClick);
-    $("#btnPlus").click(onPlusClick);
-    $("#btnEqual").click(onEqualClick);
+    $("#btnDivide").click(onOperatorClick);
+    $("#btnMultiple").click(onOperatorClick);
+    $("#btnMinus").click(onOperatorClick);
+    $("#btnPlus").click(onOperatorClick);
+    $("#btnEqual").click(onOperatorClick);
     
     $("#btn0").click(onZeroClick);
     
@@ -70,22 +72,6 @@ function reloadPage(){
     setScreenValue("0");
 }
 
-function showMenu(){
-    $('.dropdown').addClass('open');
-}
-
-function hideMenu(){
-    $('.dropdown').removeClass('open');
-}
-
-function menuAction(){
-    if ($('.dropdown').hasClass("open")){
-        hideMenu();
-    } else {
-        showMenu();
-    }
-}
-
 function setScreenValue(val){
     var screen = document.getElementById("screen");
     screen.value = val;
@@ -105,22 +91,30 @@ function appendScreenValue(val){
     }
 }
 
+var isOperator = false;
+
 function onNumClick(event){
     var value = event.currentTarget.value;
-    appendScreenValue(value);
+    if(!isOperator){
+        appendScreenValue(value);
+    } else{
+        setScreenValue(value);
+    }
+    isOperator = false;
 }
 
 function onZeroClick(){
     var screenValue = getScreenValue();
-    if (!screenValue || screenValue === "0"){
+    if(!isOperator){
+        if (!screenValue || screenValue === "0"){
         setScreenValue("0");
+        } else{
+            appendScreenValue("0");
+        }
     } else{
-        appendScreenValue("0");
+        setScreenValue("0");
     }
-}
-
-function onACClick(){
-    setScreenValue("0");
+    isOperator = false;
 }
 
 function pointPermission(){
@@ -137,31 +131,33 @@ function onPointClick(){
     if(!pointPermission()){
         return;
     }
-    
-    if(!getScreenValue()){
+    if (!isOperator){
+        if(getScreenValue() === "0"){
+            setScreenValue("0.");
+        } else{
+            appendScreenValue(".");
+        }
+    } else {
         setScreenValue("0.");
+    }
+    isOperator = false;
+}
+
+function onACClick(){
+    setScreenValue("0");
+    calculationService.reset();
+    isOperator = false;
+}
+
+function onOperatorClick(event){
+    var value = event.currentTarget.value;
+    if (isOperator){
+        calculationService.setPostponedOperation(value); 
     } else{
-        appendScreenValue(".");
+        isOperator = true;
+        var result = calculationService.applyPostponedOperation(value, getScreenValue());
+        setScreenValue(result);
     }
 }
 
-function onPlusClick(){
-    
-}
-
-function onMinusClick(){
-    
-}
-
-function onDivideClick(){
-    
-}
-
-function onMultipleClick(){
-    
-}
-
-function onEqualClick(){
-    
-}
 
