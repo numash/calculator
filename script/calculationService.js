@@ -2,19 +2,19 @@
 
 function getCalculationService() {
     var calculationService = {};
-    var operand = 0;
+    var bufferedValue = 0;
     var postponedOperation;
 
-    calculationService.setOperandValue = function(value) {
-        operand = value;
+    calculationService.setbufferedValueValue = function(value) {
+        bufferedValue = value;
     }
 
-    calculationService.getOperandValue = function(){
-        return operand;
+    calculationService.getbufferedValueValue = function(){
+        return bufferedValue;
     }
     
     calculationService.reset = function(){
-        operand = 0;
+        bufferedValue = 0;
         postponedOperation = null;
     }
     
@@ -29,23 +29,23 @@ function getCalculationService() {
     function calculate(secondOperand){
         switch(postponedOperation){
             case "+":{
-                plusOperand(secondOperand);
+                plusbufferedValue(secondOperand);
                 break;
             }
             case "-":{
-                minusOperand(secondOperand);
+                minusbufferedValue(secondOperand);
                 break;
             }
             case "*":{
-                multipleOperand(secondOperand);
+                multiplebufferedValue(secondOperand);
                 break;
             }
             case "/":{
-                divideOperand(secondOperand);
+                dividebufferedValue(secondOperand);
                 break;
             }
             case "=":{
-                operand = +secondOperand;
+                bufferedValue = +secondOperand;
                 break;
             }
         }
@@ -55,26 +55,26 @@ function getCalculationService() {
         if (postponedOperation){
             calculate(secondOperand);
         } else{
-            operand = +secondOperand;
+            bufferedValue = +secondOperand;
         }
         postponedOperation = operation;
-        return operand;
+        return bufferedValue;
     }
     
-    function plusOperand(value){
-        operand += (+value);
+    function plusbufferedValue(value){
+        bufferedValue += (+value);
     }
     
-    function minusOperand(value){
-        operand -= (+value);
+    function minusbufferedValue(value){
+        bufferedValue -= (+value);
     }
     
-    function multipleOperand(value){
-        operand *= (+value);
+    function multiplebufferedValue(value){
+        bufferedValue *= (+value);
     }
     
-    function divideOperand(value){
-        operand /= (+value);
+    function dividebufferedValue(value){
+        bufferedValue /= (+value);
     }
 
     return calculationService;

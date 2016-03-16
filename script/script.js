@@ -2,16 +2,8 @@
 
 var calculationService = getCalculationService();
 
-function screenWidth(){
-    return document.body.clientWidth;
-}
-
-function prefferedSize(){
-    return screenWidth()/3;
-}
-
 function setCalcSize(){
-    var prefferedCalcSize = prefferedSize();
+    var prefferedCalcSize = (document.body.clientWidth)/3;
     
     var screen = document.getElementById("screen");
     screen.style.width = prefferedCalcSize+"px";
@@ -26,7 +18,8 @@ function setButtonsSettings(){
     var btnsList = document.getElementsByClassName("btn");
     for (var i = 0; i < btnsList.length; i++){
         var btnId = btnsList[i].id;
-        $("#"+btnId).addClass("btn-default customBtn");
+        $("#"+btnId).addClass("customBtn");
+        //button-default 
     }
 }
 
@@ -101,6 +94,7 @@ function onNumClick(event){
         setScreenValue(value);
     }
     isOperator = false;
+    drawFooter(13);
 }
 
 function onZeroClick(){
