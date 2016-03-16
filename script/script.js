@@ -94,7 +94,7 @@ function onNumClick(event){
         setScreenValue(value);
     }
     isOperator = false;
-    drawFooter(13);
+    eraseFooter();
 }
 
 function onZeroClick(){
@@ -109,6 +109,7 @@ function onZeroClick(){
         setScreenValue("0");
     }
     isOperator = false;
+    eraseFooter();
 }
 
 function pointPermission(){
@@ -141,6 +142,7 @@ function onACClick(){
     setScreenValue("0");
     calculationService.reset();
     isOperator = false;
+    eraseFooter();
 }
 
 function onOperatorClick(event){
@@ -151,6 +153,7 @@ function onOperatorClick(event){
         isOperator = true;
         var result = calculationService.applyPostponedOperation(value, getScreenValue());
         setScreenValue(result);
+        drawFooter(result);
     }
 }
 

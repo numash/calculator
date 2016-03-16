@@ -27,16 +27,11 @@ function drawFooter(number){
     }
     
     function showDescription(){
-        footer.children[0].hidden="false";
-        footer.children[1].hidden="false";
-    }
-    
-    function hideDescription(){
         footer.children[0].style.visibility = "visible";
-        footer.children[1].hidden="true";   
     }
     
     setPonyType(ponyNumber);
+    
     switch(ponyType){
         case "sad":{
             var img = createPonyImg("sadPony");
@@ -55,7 +50,7 @@ function drawFooter(number){
         case "very happy":{
             var img = createPonyImg("veryHappyPony");
             showDescription();
-            footer.insertBefore(img, footer.children[1]);
+            footer.appendChild(img);
             break;
         }
     }
