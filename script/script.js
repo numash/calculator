@@ -60,7 +60,6 @@ function onLoad(){
 function reloadPage(){
     setCalcSize();
     setButtonsSettings();
-    //setSpecialButtonsSettings();
     setButtonsOnClick();
     setScreenValue("0");
 }
@@ -94,7 +93,6 @@ function onNumClick(event){
         setScreenValue(value);
     }
     isOperator = false;
-    eraseFooter();
 }
 
 function onZeroClick(){
@@ -109,7 +107,6 @@ function onZeroClick(){
         setScreenValue("0");
     }
     isOperator = false;
-    eraseFooter();
 }
 
 function pointPermission(){
@@ -149,11 +146,16 @@ function onOperatorClick(event){
     var value = event.currentTarget.value;
     if (isOperator){
         calculationService.setPostponedOperation(value); 
-    } else{
+    } else {
         isOperator = true;
         var result = calculationService.applyPostponedOperation(value, getScreenValue());
-        setScreenValue(result);
-        drawFooter(result);
+        if (result.isError){
+            setScreenValue(result.errorMessage);
+            drawFooter(0);
+        } else{
+            setScreenValue(result.value);
+            drawFooter(result.value);
+        }
     }
 }
 

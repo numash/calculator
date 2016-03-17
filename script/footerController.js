@@ -4,11 +4,10 @@ function drawFooter(number){
     var footer = document.getElementById("footer");
     var ponyType = null;
     var ponyNumber = Math.floor(number);
-    var balance = number - ponyNumber;
     
     function setPonyType(ponyNumber){
         if (ponyNumber >= 1){
-            if (ponyNumber > 12){
+            if (ponyNumber > 11){
                 ponyType = "very happy";
             } else{
                 ponyType = "happy";
@@ -26,34 +25,51 @@ function drawFooter(number){
         return img;
     }
     
-    function showDescription(){
-        footer.children[0].style.visibility = "visible";
+    function showDescription(value){
+        var p = footer.children[0];
+        p.innerHTML += value;
+        p.style.visibility = "visible";
     }
+    
+    eraseFooter();
     
     setPonyType(ponyNumber);
     
     switch(ponyType){
         case "sad":{
             var img = createPonyImg("sadPony");
-            showDescription();
+            showDescription(" no pony :(");
             footer.appendChild(img);
             break;
         }
-        case "happy":{
+        case "happy":{   
+            showDescription(" the number of ponies:");
             for (var i = 0; i < ponyNumber; i++){
                 var img = createPonyImg("happyPony");
-                showDescription();
                 footer.appendChild(img);
             }
             break;
         }
         case "very happy":{
             var img = createPonyImg("veryHappyPony");
-            showDescription();
+            showDescription(" so many ponies!");
             footer.appendChild(img);
             break;
         }
     }
+}
+
+function eraseFooter(){
+    var footer = document.getElementById("footer");
+    var p = footer.children[0];     //paragraph with description
+    
+    var childrenNum = footer.childElementCount;
+    for (var i = childrenNum - 1; i > 0; i--){          //child[0] - <p>, not pony
+        footer.removeChild(footer.children[i]);
+    }
+    
+    p.innerHTML = "That is";            //came back to old value
+    p.style.visibility = "hidden"; 
 }
 
 

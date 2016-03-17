@@ -5,11 +5,11 @@ function getCalculationService() {
     var bufferedValue = 0;
     var postponedOperation;
 
-    calculationService.setbufferedValueValue = function(value) {
+    calculationService.setBufferedValueValue = function(value) {
         bufferedValue = value;
     }
 
-    calculationService.getbufferedValueValue = function(){
+    calculationService.getBufferedValue = function(){
         return bufferedValue;
     }
     
@@ -25,55 +25,84 @@ function getCalculationService() {
     calculationService.getPostponedOperation = function(){
         return postponedOperation;
     }
-    
+
     function calculate(secondOperand){
-        switch(postponedOperation){
-            case "+":{
-                plusbufferedValue(secondOperand);
-                break;
+        
+        try{
+            switch(postponedOperation){
+                case "+":{
+                    plusBufferedValue(secondOperand);
+                    break;
+                }
+                case "-":{
+                    minusBufferedValue(secondOperand);
+                    break;
+                }
+                case "*":{
+                    multipleBufferedValue(secondOperand);
+                    break;
+                }
+                case "/":{
+                    divideBufferedValue(secondOperand);
+                    break;
+                }
+                case "=":{
+                    bufferedValue = +secondOperand;
+                    break;
+                }
+                default:{
+                    throw new Error("unknown operation");
+                }
             }
-            case "-":{
-                minusbufferedValue(secondOperand);
-                break;
-            }
-            case "*":{
-                multiplebufferedValue(secondOperand);
-                break;
-            }
-            case "/":{
-                dividebufferedValue(secondOperand);
-                break;
-            }
-            case "=":{
-                bufferedValue = +secondOperand;
-                break;
-            }
+        } catch(e){
+            calculationService.reset();
+            return {
+                value: null,
+                isError: true,
+                errorMessage: e.message
+            };
         }
+        
+        return {
+            value: bufferedValue,
+            isError: false,
+            errorMessage: null
+        };
     }
     
     calculationService.applyPostponedOperation = function(operation, secondOperand){
+        var result;
+            
         if (postponedOperation){
-            calculate(secondOperand);
+            result = calculate(secondOperand);
         } else{
             bufferedValue = +secondOperand;
+            result = {
+                value: bufferedValue,
+                isError: false,
+                errorMessage: null
+            };
         }
         postponedOperation = operation;
-        return bufferedValue;
+        return result;
     }
     
-    function plusbufferedValue(value){
+    function plusBufferedValue(value){
         bufferedValue += (+value);
     }
     
-    function minusbufferedValue(value){
+    function minusBufferedValue(value){
         bufferedValue -= (+value);
     }
     
-    function multiplebufferedValue(value){
+    function multipleBufferedValue(value){
         bufferedValue *= (+value);
     }
     
-    function dividebufferedValue(value){
+    function divideBufferedValue(value){
+        if (+value === 0){
+            throw new Error("Cannot divide by zero");
+        }
         bufferedValue /= (+value);
     }
 

@@ -18,7 +18,7 @@
     background-color: #FFC0CB;
 }
 
-#screen{
+#screen {
     border: 2px #FF69B4 solid;
 }
 
@@ -26,22 +26,32 @@ body {
     background-color: #FFE4E1;
 }
 
-h1 { 
-    color: #d54d7b; 
+h1 {
+    color: #d54d7b;
     font-family: "Great Vibes", cursive;
-    font-size: 40px; 
-    line-height: 50px; 
-    font-weight: normal; 
-    margin-bottom: 0px; 
-    margin-top: 5px; 
-    text-align: center; 
+    font-size: 40px;
+    line-height: 50px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    margin-top: 5px;
+    text-align: center;
     text-shadow: 0 1px 1px #fff;
 }
 
 p {
-    color: #7a7c7f; 
+    color: #7a7c7f;
     font-size: 20px;
-    font-family: "Libre Baskerville", serif; 
-    text-align: center; 
-    text-shadow: 0 1px 1px #fff; 
+    font-family: "Libre Baskerville", serif;
+    text-align: center;
+    text-shadow: 0 1px 1px #fff;
+}
+
+span {
+    position: absolute;
+    bottom: 0px;
+    color: #7a7c7f;
+    font-family: "Libre Baskerville", serif;
+    font-size: 18px;
+    margin-bottom: 0px;
+    text-shadow: 0 1px 1px #fff;
 }
