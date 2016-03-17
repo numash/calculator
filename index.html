@@ -1,61 +1,61 @@
 <!DOCTYPE html>
-    <html>
-    <meta charset="utf-8" author="Masha Malyschenko" />
+<html>
+<meta charset="utf-8" author="Masha Malyschenko" />
 
-    <head>
-        <link rel="stylesheet" href="styles/bootstrap.min.css">
-        <link rel="stylesheet" href="styles/bootstrap-theme.min.css">
-        <link rel="stylesheet" type="text/css" href="styles/main.css">
-        <script type="text/javascript" src="script/jquery-1.12.1.min.js"></script>
-        <script type="text/javascript" src="script/calculationService.js"></script>
-        <script type="text/javascript" src="script/footerController.js"></script>
-        <script type="text/javascript" src="script/script.js"></script>
-        <title>Calculator</title>
-    </head>
+<head>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <script type="text/javascript" src="script/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="script/calculationService.js"></script>
+    <script type="text/javascript" src="script/footerController.js"></script>
+    <script type="text/javascript" src="script/script.js"></script>
+    <title>Calculator</title>
+</head>
 
-    <body onload="onLoad()">
-        <div>
-            <h1>Princess Calculator</h1>
-            <p>I'll count all your ponies :)</p>
+<body onload="onLoad()">
+    <div>
+        <h1>Princess Calculator</h1>
+        <p>I'll count all your ponies :)</p>
+    </div>
+    <div class="panel panel-default" align="center">
+        <div class="panel-heading">
+            <input type="text" id="screen" readonly></input>
         </div>
-        <div class="panel panel-default" align="center">
-            <div class="panel-heading">
-                <input type="text" id="screen" readonly></input>
+        <div class="panel-body">
+
+            <div class="row">
+                <input type="button" class="col-md-3 btn" id="btnAC" value="AC"></input>
+                <input type="button" class="col-md-3 btn" id="btn0" value="0"></input>
+                <input type="button" class="col-md-2 btn" id="btnPoint" value="."></input>
+                <input type="button" class="col-md-2 btn" id="btnDivide" value="/"></input>
+                <input type="button" class="col-md-2 btn" id="btnMultiple" value="*"></input>
             </div>
-            <div class="panel-body">
-                
-               <div class="row">
-                    <input type="button" class="col-md-3 btn" id="btnAC" value="AC"></input>
-                    <input type="button" class="col-md-3 btn" id="btn0" value="0"></input>
-                    <input type="button" class="col-md-2 btn" id="btnPoint" value="."></input>
-                    <input type="button" class="col-md-2 btn" id="btnDivide" value="/"></input>
-                    <input type="button" class="col-md-2 btn" id="btnMultiple" value="*"></input>
-                </div>
-                <div class="row">
-                    <input type="button" class="col-md-3 btn" id="btn7" value="7"></input>
-                    <input type="button" class="col-md-3 btn" id="btn8" value="8"></input>
-                    <input type="button" class="col-md-3 btn" id="btn9" value="9"></input>
-                    <input type="button" class="col-md-3 btn" id="btnMinus" value="-"></input>
-                </div>
-                <div class="row">
-                    <input type="button" class="col-md-3 btn" id="btn4" value="4"></input>
-                    <input type="button" class="col-md-3 btn" id="btn5" value="5"></input>
-                    <input type="button" class="col-md-3 btn" id="btn6" value="6"></input>
-                    <input type="button" class="col-md-3 btn" id="btnPlus" value="+"></input>
-                </div>
-                <div class="row">
-                    <input type="button" class="col-md-3 btn" id="btn1" value="1"></input>
-                    <input type="button" class="col-md-3 btn" id="btn2" value="2"></input>
-                    <input type="button" class="col-md-3 btn" id="btn3" value="3"></input>
-                    <input type="button" class="col-md-3 btn" id="btnEqual" value="="></input>
-                </div>
+            <div class="row">
+                <input type="button" class="col-md-3 btn" id="btn7" value="7"></input>
+                <input type="button" class="col-md-3 btn" id="btn8" value="8"></input>
+                <input type="button" class="col-md-3 btn" id="btn9" value="9"></input>
+                <input type="button" class="col-md-3 btn" id="btnMinus" value="-"></input>
             </div>
-            <div class="panel-footer" id="footer">
-                <p style="visibility: hidden">That is</p>
+            <div class="row">
+                <input type="button" class="col-md-3 btn" id="btn4" value="4"></input>
+                <input type="button" class="col-md-3 btn" id="btn5" value="5"></input>
+                <input type="button" class="col-md-3 btn" id="btn6" value="6"></input>
+                <input type="button" class="col-md-3 btn" id="btnPlus" value="+"></input>
+            </div>
+            <div class="row">
+                <input type="button" class="col-md-3 btn" id="btn1" value="1"></input>
+                <input type="button" class="col-md-3 btn" id="btn2" value="2"></input>
+                <input type="button" class="col-md-3 btn" id="btn3" value="3"></input>
+                <input type="button" class="col-md-3 btn" id="btnEqual" value="="></input>
             </div>
         </div>
-        <span style="left: 10px">I hope, you like pink</span>
-        <span style="right: 10px">&copy;numash</span>
-    </body>
+        <div class="panel-footer" id="footer">
+            <p style="visibility: hidden">That is</p>
+        </div>
+    </div>
+    <span style="left: 10px">I hope, you like pink</span>
+    <span style="right: 10px">&copy;numash</span>
+</body>
 
-    </html>
+</html>

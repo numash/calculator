@@ -1,37 +1,36 @@
-"use strict"
+"use strict";
 
 var calculationService = getCalculationService();
 
-function setCalcSize(){
-    var prefferedCalcSize = (document.body.clientWidth)/3;
-    
+function setCalcSize() {
+    var prefferedCalcSize = (document.body.clientWidth) / 3;
+
     var screen = document.getElementById("screen");
-    screen.style.width = prefferedCalcSize+"px";
-    
+    screen.style.width = prefferedCalcSize + "px";
+
     var classList = document.getElementsByClassName("row");
-    for (var i = 0; i<classList.length; i++){
-        classList[i].style.width = prefferedCalcSize+"px";
+    for (var i = 0; i < classList.length; i++) {
+        classList[i].style.width = prefferedCalcSize + "px";
     }
 }
 
-function setButtonsSettings(){
+function setButtonsSettings() {
     var btnsList = document.getElementsByClassName("btn");
-    for (var i = 0; i < btnsList.length; i++){
+    for (var i = 0; i < btnsList.length; i++) {
         var btnId = btnsList[i].id;
-        $("#"+btnId).addClass("customBtn");
-        //button-default 
+        $("#" + btnId).addClass("customBtn");
     }
 }
 
-function setSpecialButtonsSettings(){
+function setSpecialButtonsSettings() {
     var btnsList = document.getElementsByClassName("spec");
-    for (var i = 0; i < btnsList.length; i++){
+    for (var i = 0; i < btnsList.length; i++) {
         var btnId = btnsList[i].id;
-        $("#"+btnId).hide();
+        $("#" + btnId).hide();
     }
 }
 
-function setButtonsOnClick(){
+function setButtonsOnClick() {
     $("#btnAC").click(onACClick);
     $("#btnPoint").click(onPointClick);
     $("#btnDivide").click(onOperatorClick);
@@ -39,9 +38,9 @@ function setButtonsOnClick(){
     $("#btnMinus").click(onOperatorClick);
     $("#btnPlus").click(onOperatorClick);
     $("#btnEqual").click(onOperatorClick);
-    
+
     $("#btn0").click(onZeroClick);
-    
+
     $("#btn1").click(onNumClick);
     $("#btn2").click(onNumClick);
     $("#btn3").click(onNumClick);
@@ -53,110 +52,116 @@ function setButtonsOnClick(){
     $("#btn9").click(onNumClick);
 }
 
-function onLoad(){
+function onLoad() {
     reloadPage();
 }
 
-function reloadPage(){
+function reloadPage() {
     setCalcSize();
     setButtonsSettings();
     setButtonsOnClick();
     setScreenValue("0");
 }
 
-function setScreenValue(val){
+function setScreenValue(val) {
     var screen = document.getElementById("screen");
     screen.value = val;
 }
 
-function getScreenValue(){
+function getScreenValue() {
     var screen = document.getElementById("screen");
     return screen.value;
 }
 
-function appendScreenValue(val){
+function appendScreenValue(val) {
     var screen = document.getElementById("screen");
-    if (screen.value === "0"){
+    if (screen.value === "0") {
         screen.value = val;
-    } else{
+    }
+    else {
         screen.value += val;
     }
 }
 
 var isOperator = false;
 
-function onNumClick(event){
+function onNumClick(event) {
     var value = event.currentTarget.value;
-    if(!isOperator){
+    if (!isOperator) {
         appendScreenValue(value);
-    } else{
+    }
+    else {
         setScreenValue(value);
     }
     isOperator = false;
 }
 
-function onZeroClick(){
+function onZeroClick() {
     var screenValue = getScreenValue();
-    if(!isOperator){
-        if (!screenValue || screenValue === "0"){
-        setScreenValue("0");
-        } else{
+    if (!isOperator) {
+        if (!screenValue || screenValue === "0") {
+            setScreenValue("0");
+        }
+        else {
             appendScreenValue("0");
         }
-    } else{
+    }
+    else {
         setScreenValue("0");
     }
     isOperator = false;
 }
 
-function pointPermission(){
+function pointPermission() {
     var screenValue = getScreenValue();
 
-    if (!screenValue){
+    if (!screenValue) {
         return true;
     }
-    
+
     return screenValue.indexOf(".") === -1;
 }
 
-function onPointClick(){
-    if(!pointPermission()){
+function onPointClick() {
+    if (!pointPermission()) {
         return;
     }
-    if (!isOperator){
-        if(getScreenValue() === "0"){
+    if (!isOperator) {
+        if (getScreenValue() === "0") {
             setScreenValue("0.");
-        } else{
+        }
+        else {
             appendScreenValue(".");
         }
-    } else {
+    }
+    else {
         setScreenValue("0.");
     }
     isOperator = false;
 }
 
-function onACClick(){
+function onACClick() {
     setScreenValue("0");
     calculationService.reset();
     isOperator = false;
     eraseFooter();
 }
 
-function onOperatorClick(event){
+function onOperatorClick(event) {
     var value = event.currentTarget.value;
-    if (isOperator){
-        calculationService.setPostponedOperation(value); 
-    } else {
+    if (isOperator) {
+        calculationService.setPostponedOperation(value);
+    }
+    else {
         isOperator = true;
         var result = calculationService.applyPostponedOperation(value, getScreenValue());
-        if (result.isError){
+        if (result.isError) {
             setScreenValue(result.errorMessage);
             drawFooter(0);
-        } else{
+        }
+        else {
             setScreenValue(result.value);
             drawFooter(result.value);
         }
     }
 }
-
-
